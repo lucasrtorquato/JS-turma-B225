@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios Operadores</title>
+</head>
+<body>
+
+    <p>Aperte F12 para visualizar os resultados</p>
+    
+    <script>
+
+        function exercicio1(){
+            const numero1 = Number(prompt("Informe um número"));
+            const numero2 = Number(prompt("Informe outro número"));
+            console.log(numero1 + numero2);
+            console.log(numero1 - numero2);
+            console.log(numero1 * numero2);
+            console.log(numero1 / numero2);
+        }
+
+        //exercicio1();
+
+        function exercicio2(){
+            const numero = Number(prompt("Informe um número"));
+            console.log(`O número informado foi ${numero} e seu antecessor é ${numero-1} e o seu sucessor é ${numero+1}`);
+        }
+        //exercicio2();
+
+        function exercicio6(){
+            const reais = Number(prompt("Informe quanto você tem em R$ na carteira"));
+            const dolar = reais/5.31;
+            console.log(`${dolar.toFixed(2)}`);
+        }
+        // exercicio6();
+
+        function exercicio7(){
+            const valorProduto = Number(prompt("Informe o valor do produto"));
+            const valorFinal = valorProduto * 0.95;
+            const valorFinal2 = valorProduto  - (valorProduto * 0.05);
+            console.log(valorFinal.toFixed(2));
+            console.log(valorFinal2.toFixed(2));
+        }
+        //exercicio7();
+
+
+    </script>
+</body>
+</html>
