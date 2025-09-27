@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade Arrays e Objetos</title>
+</head>
+<body>
+
+    <p>F12 para ver os exercícios</p>
+    
+
+    <script>
+
+        //ex1
+        function exercicio1(){
+            const playlist = ["Bohemian Rhapsody","Love Of My Life","We Are The Champions"];
+            //imprimir primeira musica
+            console.log(playlist[0]);
+            //adicionar musica na última posição
+            playlist.push("Radio Ga Ga");
+            //remover ultima música
+            playlist.pop();
+            //imprimir quantos itens tem a playlist
+            console.log(playlist.length);
+        }
+
+        // exercicio1();
+
+        //ex2
+        function exercicio2(){
+            filme = {
+                titulo: "Velozes & Furiosos 7",
+                diretor: "James Wan",
+                ano: 2015
+            }
+            //imprimir frase
+            console.log(`O filme ${filme.titulo}, dirigido por ${filme.diretor}, foi lançado em ${filme.ano}`);
+            //criar propriedade personagens com array
+            filme.personagens = ["DOM","Brian","Hobbs"];
+            //imprimir primeiro personagem
+            console.log(filme.personagens[0]);
+            //imprimir objeto
+            console.log(filme);
+        }
+
+        //exercicio2();
+
+
+    </script>
+</body>
+</html>
