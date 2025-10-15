@@ -99,6 +99,25 @@ function inicializacao(){
 
     form.addEventListener("submit",salvarUsuario);
 
+    tabelaCorpo.addEventListener("click", (event) =>{
+        const target = event.target.closest("button");
+        //console.log(target);
+        if (!target) return; // se existe um botão
+
+        const id = Number(target.dataset.id);
+
+        if (isNaN(id)) return; //se o id é numérico
+
+        if (target.classList.contains("btn-danger")){
+            excluirUsuario(id);
+        } else if(target.classList.contains("btn-warning")){
+            editarUsuario(id);
+        }
+        
+
+
+    });
+
     mostrarTelaLista();
 }
 
