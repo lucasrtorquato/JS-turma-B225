@@ -34,6 +34,18 @@ const btnDownloadJson = document.querySelector("#btn-download-json");
 const btnUploadJson = document.querySelector("#btn-upload-json");
 const uploadJsonInput = document.querySelector("#upload-json-input");
 
+//modal
+const modalElement = document.querySelector('#detalhes-modal');
+const modalNome = document.querySelector('#modal-nome');
+const modalAvatar = document.querySelector('#modal-avatar');
+const modalEmail = document.querySelector('#modal-email');
+const modalEndereco = document.querySelector('#modal-endereco-completo');
+const modalObs = document.querySelector('#modal-obs');
+const modalBtnEditar = document.querySelector('#modal-btn-editar');
+const modalBtnExcluir = document.querySelector('#modal-btn-excluir');
+
+const modal = new bootstrap.Modal(modalElement);
+
 
 
 
@@ -138,6 +150,9 @@ function renderizarTabela(usuariosParaRenderizar = usuarios){
             <td>
                 <button class="btn btn-sm btn-warning" data-id="${user.id}">Editar</button>
                 <button class="btn btn-sm btn-danger" data-id="${user.id}">Excluir</button>
+                <button class="btn btn-sm btn-info" data-id="${user.id}">
+                    <i class="bi bi-eye-fill"></i> Ver Detalhes
+                </button>
             </td>
         `;
         tabelaCorpo.appendChild(tr);
@@ -229,6 +244,34 @@ function uploadJson(event){
     leitor.readAsText(arquivo);
 }
 
+function mostrarDetalhesUsuario(id) {
+
+    const user = usuarios.find(u => u.id === id);
+    if (!user) return; 
+
+    modalNome.textContent = `${user.nome} ${user.sobrenome}`;
+    modalEmail.textContent = user.email;
+    
+    const endereco = [user.rua, user.numero, user.bairro, user.cidade, user.estado, user.cep].filter(Boolean).join(', ');
+    modalEndereco.textContent = endereco || 'Endereço não informado.';
+    
+    modalObs.textContent = user.obs || 'Nenhuma observação.';
+
+    modalBtnEditar.dataset.id = user.id;
+    modalBtnExcluir.dataset.id = user.id;
+
+    const botoes = [modalBtnEditar, modalBtnExcluir];
+    reordenarBotoes(botoes);
+
+    modal.show();
+}
+
+function reordenarBotoes(botoes) {
+    botoes.sort(() => Math.random() - 0.5);
+    document.querySelector('#btn-container').innerHTML = '';
+    botoes.forEach(botao => document.querySelector('#btn-container').appendChild(botao));
+}
+
 function inicializacao(){
     btnAdicionar.addEventListener("click",mostrarTelaCadastro);
     btnVoltar.addEventListener("click",mostrarTelaLista);
@@ -252,6 +295,8 @@ function inicializacao(){
             excluirUsuario(id);
         } else if(target.classList.contains("btn-warning")){
             editarUsuario(id);
+        } else if (target.classList.contains('btn-info')) {
+            mostrarDetalhesUsuario(id);
         }
     });
 
@@ -260,6 +305,21 @@ function inicializacao(){
     btnUploadJson.addEventListener("click", () => uploadJsonInput.click());
 
     uploadJsonInput.addEventListener("change", uploadJson);
+
+    modalElement.addEventListener("click", (event) => {
+        const target = event.target.closest('button');
+        if (!target) return;
+
+        const id = Number(target.dataset.id);
+
+        if (target.id === 'modal-btn-editar') {
+            modal.hide();
+            editarUsuario(id);
+        } else if (target.id === 'modal-btn-excluir') {
+            modal.hide();
+            excluirUsuario(id);
+        }
+    });
 
     mostrarTelaLista();
 }
